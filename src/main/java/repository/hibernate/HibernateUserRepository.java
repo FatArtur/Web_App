@@ -34,9 +34,11 @@ public class HibernateUserRepository implements UserRepository {
     @Override
     public User getByID(Long id) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        User user = session.createQuery("SELECT a FROM User a JOIN FETCH a.files WHERE a.id = " + id +
-                " JOIN FETCH a.events WHERE a.id =" + id,
+        User user = session.createQuery("SELECT a FROM User a JOIN FETCH a.files WHERE a.id = " + id,
                 User.class).getSingleResult();
+        user = session.createQuery("SELECT a FROM User a JOIN FETCH a.events WHERE a.id = " + id,
+                User.class).getSingleResult();
+
         session.close();
         return user;
     }
@@ -45,7 +47,9 @@ public class HibernateUserRepository implements UserRepository {
     public List<User> getAll() throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<User> list = session.createQuery("SELECT DISTINCT a FROM User a left " +
-                "join fetch a.files order by a.id join fetch a.events order by a.id").getResultList();
+                "join fetch a.files order by a.id").getResultList();
+        list = session.createQuery("SELECT DISTINCT a FROM User a left " +
+                "join fetch a.events order by a.id").getResultList();
         session.close();
         return list;
     }

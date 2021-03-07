@@ -16,7 +16,7 @@ public class File {
     private String address;
     @Enumerated(EnumType.STRING)
     private FileStatus fileStatus;
-    @OneToMany (mappedBy="file_id", fetch=FetchType.LAZY)
+    @OneToMany (mappedBy="file", fetch=FetchType.LAZY)
     private List<Event> events;
 
 
@@ -29,11 +29,11 @@ public class File {
     }
 
     public String getName() {
-        return address;
+        return name;
     }
 
     public void setName(String name) {
-        this.address = name;
+        this.name = name;
     }
 
     public FileStatus getFileStatus() {
@@ -52,6 +52,14 @@ public class File {
         this.address = address;
     }
 
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
     @Override
     public String toString() {
         return "File{" +
@@ -59,6 +67,6 @@ public class File {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", fileStatus=" + fileStatus +
-                '}';
+                "}";
     }
 }

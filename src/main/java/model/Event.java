@@ -11,7 +11,7 @@ public class Event {
     private Long id;
     @Column(name = "data")
     private Date date;
-    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @ManyToOne (optional=false)
     @JoinColumn (name="file_id")
     private File file;
 
@@ -36,7 +36,7 @@ public class Event {
         return file;
     }
 
-    public void setFile(File file_id) {
+    public void setFile(File file) {
         this.file = file;
     }
 
@@ -46,6 +46,6 @@ public class Event {
                 "id=" + id +
                 ", date=" + date +
                 ", file_id=" + file +
-                '}';
+                "}";
     }
 }

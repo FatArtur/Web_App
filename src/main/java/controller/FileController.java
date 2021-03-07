@@ -33,7 +33,7 @@ public class FileController {
     public void getAll() throws Exception {
         List<File> list = repo.getAll();
         list.stream().forEach(s -> System.out.println("ID = " + s.getId() + " File = " + s.getName() +
-               "ADDRESS = "+ s.getAddress() + " STATUS: " + s.getFileStatus()));
+               " ADDRESS = "+ s.getAddress() + " STATUS: " + s.getFileStatus()));
     }
 
     public File update(String val1, String val2, String val3,FileStatus val4) throws Exception {

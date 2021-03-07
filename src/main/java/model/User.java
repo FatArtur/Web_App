@@ -65,5 +65,14 @@ public class User {
         this.events = events;
     }
 
-
+    @Override
+    public String toString() {
+        return "User\n{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", account=" + account +
+                ", \nfiles=" + files +
+                ", \nevents=" + events +
+                "}\n";
+    }
 }
