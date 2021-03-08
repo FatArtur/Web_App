@@ -1,5 +1,12 @@
 <html>
+<head>
+    <meta charset="UTF-8">
+    <title>WebApp Servlet Page</title>
+</head>
 <body>
-<h2>Hello World!</h2>
+<ul>
+    <li><a href="account">Account</a></li>
+    <li><a href="event">Event</a></li>
+</ul>
 </body>
 </html>

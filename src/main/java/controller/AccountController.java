@@ -29,10 +29,11 @@ public class AccountController {
         return account;
     }
 
-    public void getAll() throws Exception {
+    public List<Account> getAll() throws Exception{
         List<Account> list = repo.getAll();
-        list.stream().forEach(s -> System.out.println("ID = " + s.getId() + " Account = " + s.getName() +
-                " STATUS: " + s.getAccountStatus()));
+//        list.stream().forEach(s -> System.out.println("ID = " + s.getId() + " Account = " + s.getName() +
+//                " STATUS: " + s.getAccountStatus()));
+        return list;
     }
 
     public Account update(String val1, String val2, AccountStatus val3) throws Exception {
