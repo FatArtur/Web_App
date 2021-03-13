@@ -1,15 +1,19 @@
 package view;
 
+import com.google.gson.Gson;
 import controller.AccountController;
 import model.AccountStatus;
 
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-public class AccountViewServlet extends HttpServlet {
+public class AccountViewServlet extends HttpServlet{
     private AccountController controller;
 
     @Override
@@ -21,40 +25,67 @@ public class AccountViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             req.setAttribute("accounts", controller.getAll());
+            resp.setContentType("application/json");
+            controller.getAll().stream().map(s -> {String json = new Gson().toJson(s);
+            return json;}).collect(Collectors.toList()).forEach((s) -> {
+                try {
+                    resp.getWriter().write(s);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
-        req.getRequestDispatcher("/account.jsp").forward(req, resp);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Enter doPost");
         req.setCharacterEncoding("UTF-8");
 
-        String action = req.getParameter("action");
         try {
-            if (action.equals("create")) {
-                String name = req.getParameter("name");
+            List<String> val = req.getReader().lines().collect(Collectors.toList());
+            for (String stringTXT: val) {
+                Map<String, String> result = new Gson().fromJson(stringTXT, Map.class);
+                String name = result.get("name");
                 controller.create(name);
             }
-
-            if (action.equals("update")){
-                String id = req.getParameter("id");
-                String name = req.getParameter("name");
-                String accountStatus = req.getParameter("accountStatus");
-                controller.update(id,name, AccountStatus.valueOf(accountStatus));
-            }
-
-            if (action.equals("delete")){
-                String id = req.getParameter("id");
-                controller.delete(id);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception e){
+            e.printStackTrace();
         }
         doGet(req, resp);
     }
 
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            List<String> val = req.getReader().lines().collect(Collectors.toList());
+            for (String stringTXT: val) {
+                Map<String, String> result = new Gson().fromJson(stringTXT, Map.class);
+                String id = result.get("id");
+                String name = result.get("name");
+                String accountStatus = result.get("accountStatus");
+                controller.update(id,name, AccountStatus.valueOf(accountStatus));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        doGet(req, resp);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            List<String> val = req.getReader().lines().collect(Collectors.toList());
+            for (String stringTXT: val) {
+                Map<String, String> result = new Gson().fromJson(stringTXT, Map.class);
+                String id = result.get("id");
+                controller.delete(id);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        doGet(req, resp);
+    }
 }

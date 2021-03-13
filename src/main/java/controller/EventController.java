@@ -30,10 +30,9 @@ public class EventController {
         return event;
     }
 
-    public void getAll() throws Exception {
+    public List<Event> getAll() throws Exception {
         List<Event> list = repo.getAll();
-        list.stream().forEach(s -> System.out.println("ID = " + s.getId() + " Data = " + s.getDate() +
-                " File: " + s.getFile().getName()));
+        return list;
     }
 
     public Event update(String val1, Date date, File val2) throws Exception {

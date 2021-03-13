@@ -31,8 +31,6 @@ public class AccountController {
 
     public List<Account> getAll() throws Exception{
         List<Account> list = repo.getAll();
-//        list.stream().forEach(s -> System.out.println("ID = " + s.getId() + " Account = " + s.getName() +
-//                " STATUS: " + s.getAccountStatus()));
         return list;
     }
 

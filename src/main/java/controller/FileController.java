@@ -30,10 +30,11 @@ public class FileController {
         return file;
     }
 
-    public void getAll() throws Exception {
+    public List<File> getAll() throws Exception {
         List<File> list = repo.getAll();
         list.stream().forEach(s -> System.out.println("ID = " + s.getId() + " File = " + s.getName() +
                " ADDRESS = "+ s.getAddress() + " STATUS: " + s.getFileStatus()));
+        return list;
     }
 
     public File update(String val1, String val2, String val3,FileStatus val4) throws Exception {

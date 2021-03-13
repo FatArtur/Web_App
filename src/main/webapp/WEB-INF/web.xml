@@ -9,6 +9,16 @@
          version="3.1">
   <display-name>Archetype Created Web Application</display-name>
 
+  <filter>
+    <filter-name>FilterClass</filter-name>
+    <filter-class>view.FilterClass</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>FilterClass</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <servlet>
     <servlet-name>account</servlet-name>
     <servlet-class>view.AccountViewServlet</servlet-class>
