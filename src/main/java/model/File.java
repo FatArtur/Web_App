@@ -2,7 +2,6 @@ package model;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "Files", schema = "Web_app")
@@ -16,8 +15,6 @@ public class File {
     private String address;
     @Enumerated(EnumType.STRING)
     private FileStatus fileStatus;
-    @OneToMany (mappedBy="file", fetch=FetchType.LAZY)
-    private List<Event> events;
 
 
     public Long getId() {
@@ -52,13 +49,6 @@ public class File {
         this.address = address;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
 
     @Override
     public String toString() {

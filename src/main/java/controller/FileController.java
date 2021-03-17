@@ -32,8 +32,6 @@ public class FileController {
 
     public List<File> getAll() throws Exception {
         List<File> list = repo.getAll();
-        list.stream().forEach(s -> System.out.println("ID = " + s.getId() + " File = " + s.getName() +
-               " ADDRESS = "+ s.getAddress() + " STATUS: " + s.getFileStatus()));
         return list;
     }
 

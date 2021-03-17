@@ -42,8 +42,6 @@ public class AccountViewServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-
         try {
             List<String> val = req.getReader().lines().collect(Collectors.toList());
             for (String stringTXT: val) {
