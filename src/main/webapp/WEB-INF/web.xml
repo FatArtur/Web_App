@@ -48,4 +48,14 @@
     <servlet-name>event</servlet-name>
     <url-pattern>/event</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>user</servlet-name>
+    <servlet-class>view.UserViewServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>user</servlet-name>
+    <url-pattern>/user</url-pattern>
+  </servlet-mapping>
 </web-app>

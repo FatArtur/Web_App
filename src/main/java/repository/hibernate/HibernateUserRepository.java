@@ -36,8 +36,12 @@ public class HibernateUserRepository implements UserRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         User user = session.createQuery("SELECT a FROM User a JOIN FETCH a.files WHERE a.id = " + id,
                 User.class).getSingleResult();
-        user = session.createQuery("SELECT a FROM User a JOIN FETCH a.events WHERE a.id = " + id,
-                User.class).getSingleResult();
+        try {
+            user = session.createQuery("SELECT a FROM User a JOIN FETCH a.events WHERE a.id = " + id,
+                    User.class).getSingleResult();
+        } catch (Exception e){}
+//        user = session.createQuery("SELECT a FROM User a JOIN FETCH a.events WHERE a.id = " + id,
+//                User.class).getSingleResult();
         session.close();
         return user;
     }
